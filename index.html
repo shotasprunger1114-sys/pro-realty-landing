@@ -57,7 +57,7 @@
   }
 
   .nav-logo img {
-    height: 44px;
+    height: 64px;
     filter: brightness(0) invert(1);
   }
 
@@ -83,6 +83,8 @@
       radial-gradient(ellipse at 20% 50%, rgba(196, 149, 58, 0.12) 0%, transparent 60%),
       radial-gradient(ellipse at 80% 20%, rgba(196, 149, 58, 0.08) 0%, transparent 50%),
       linear-gradient(135deg, #0B1A2F 0%, #0E2040 50%, #0B1A2F 100%);
+    background-size: 200% 200%;
+    animation: heroBgShift 18s ease infinite;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -255,11 +257,11 @@
     border-radius: 8px;
     padding: 32px 28px;
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateX(-60px);
     transition: all 0.6s ease;
   }
 
-  .pain-card.visible { opacity: 1; transform: translateY(0); }
+  .pain-card.visible { opacity: 1; transform: translateX(0); }
 
   .pain-icon {
     font-size: 28px;
@@ -784,6 +786,8 @@
     position: relative;
     z-index: 1;
     display: block;
+    mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
   }
 
   .about-eyebrow {
@@ -1173,6 +1177,36 @@
     .calc-card { padding: 28px 20px; }
     .about-inner { gap: 40px; }
   }
+
+  /* ===================== STATS BAR ===================== */
+  .stat-counter-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .stat-counter-num.counted { opacity: 1; }
+
+  /* ===================== NEW KEYFRAMES ===================== */
+  @keyframes floatOrb {
+    0%,100%{transform:translateY(0) translateX(0) scale(1)}
+    33%{transform:translateY(-40px) translateX(25px) scale(1.05)}
+    66%{transform:translateY(30px) translateX(-20px) scale(0.95)}
+  }
+  @keyframes heroBgShift {
+    0%,100%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+  }
+  @keyframes ripple {
+    to{transform:scale(4);opacity:0}
+  }
+  @keyframes countUp {
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:translateY(0)}
+  }
 </style>
 </head>
 <body>
@@ -1180,13 +1214,27 @@
 <!-- NAV -->
 <nav id="navbar">
   <div class="nav-logo">
-    <img src="assets/logo-dark.png" alt="Pro Realty Group" />
+    <img src="assets/logo-black.png" alt="Pro Realty Group" />
   </div>
   <a href="https://calendly.com/realtor-billyj/30min" target="_blank" class="nav-cta">Book a Confidential Call →</a>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
+  <!-- Floating orbs -->
+  <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0">
+    <div style="position:absolute;width:320px;height:320px;border-radius:50%;background:rgba(196,149,58,0.08);filter:blur(70px);top:5%;left:3%;animation:floatOrb 16s ease-in-out infinite"></div>
+    <div style="position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(196,149,58,0.07);filter:blur(50px);top:55%;right:5%;animation:floatOrb 20s ease-in-out infinite reverse"></div>
+    <div style="position:absolute;width:160px;height:160px;border-radius:50%;background:rgba(196,149,58,0.1);filter:blur(35px);top:25%;right:20%;animation:floatOrb 12s ease-in-out infinite 3s"></div>
+    <div style="position:absolute;width:260px;height:260px;border-radius:50%;background:rgba(7,15,28,0.6);filter:blur(60px);bottom:25%;left:28%;animation:floatOrb 18s ease-in-out infinite 6s"></div>
+    <div style="position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(196,149,58,0.06);filter:blur(25px);bottom:35%;left:10%;animation:floatOrb 14s ease-in-out infinite 2s"></div>
+  </div>
+  <!-- Floating badges -->
+  <div style="position:absolute;bottom:120px;left:5%;animation:fadeUp 0.8s ease 1.5s both;display:flex;flex-direction:column;gap:12px;z-index:2">
+    <div style="background:rgba(196,149,58,0.15);border:1px solid rgba(196,149,58,0.4);border-radius:40px;padding:10px 20px;font-size:13px;font-weight:600;color:var(--gold);white-space:nowrap;animation:floatOrb 6s ease-in-out infinite;backdrop-filter:blur(8px)">✓ 100% Commission to You</div>
+    <div style="background:rgba(196,149,58,0.1);border:1px solid rgba(196,149,58,0.3);border-radius:40px;padding:10px 20px;font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);white-space:nowrap;animation:floatOrb 8s ease-in-out infinite 1s;backdrop-filter:blur(8px)">★ Michigan's Agent-First Brokerage</div>
+  </div>
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center">
   <div class="hero-eyebrow">Michigan's Agent-First Brokerage</div>
   <h1 class="hero-headline">
     Stop Making Your<br />
@@ -1201,6 +1249,7 @@
     <a href="https://calendly.com/realtor-billyj/30min" target="_blank" class="btn-primary">Book a Confidential Call →</a>
     <a href="#calculator" class="hero-micro-cta">Or scroll to see what you'd keep with our commission calculator ↓</a>
   </div>
+  </div><!-- end z-index:1 wrapper -->
 
   <div class="ticker-wrapper">
     <div class="ticker-track">
@@ -1219,6 +1268,36 @@
       <span class="ticker-item"><span class="ticker-dot"></span> Leads Provided If Needed</span>
       <span class="ticker-item"><span class="ticker-dot"></span> No Franchise Fees</span>
       <span class="ticker-item"><span class="ticker-dot"></span> No Catches</span>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE DIVIDER -->
+<div style="background:var(--navy);line-height:0;margin-bottom:-2px">
+  <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:70px">
+    <path d="M0,35 C240,70 480,0 720,35 C960,70 1200,0 1440,35 L1440,70 L0,70 Z" fill="#F7F6F3"/>
+    <path d="M0,50 C360,20 1080,60 1440,30 L1440,70 L0,70 Z" fill="rgba(196,149,58,0.06)"/>
+  </svg>
+</div>
+
+<!-- STATS BAR -->
+<section id="stats-bar" style="background:var(--off-white);padding:60px 24px;border-bottom:1px solid var(--border)">
+  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center">
+    <div class="stat-counter">
+      <div class="stat-counter-num" data-target="100" data-suffix="%">0%</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:8px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase">Commission to You</div>
+    </div>
+    <div class="stat-counter">
+      <div class="stat-counter-num" data-target="300" data-prefix="$">$0</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:8px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase">Flat Fee Per Closing</div>
+    </div>
+    <div class="stat-counter">
+      <div class="stat-counter-num" data-static="1-on-1">1-on-1</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:8px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase">Broker Coaching</div>
+    </div>
+    <div class="stat-counter">
+      <div class="stat-counter-num" data-static="24/7">24/7</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:8px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase">Broker Availability</div>
     </div>
   </div>
 </section>
@@ -1411,6 +1490,21 @@
         Calculator assumes all closings are personal (not office-provided leads). Office leads are 50/50 split.<br/>
         Includes PRG's $100/month tech & E&amp;O fee ($1,200/year). Compliance fee ($300/closing) is passed to buyer/seller at closing.
       </p>
+
+      <!-- Bar Chart -->
+      <div id="calc-chart" style="margin-top:32px;padding:28px 32px;background:rgba(255,255,255,0.04);border-radius:12px;border:1px solid rgba(255,255,255,0.08)">
+        <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:24px;text-align:center">Annual Earnings Comparison</div>
+        <div style="display:flex;align-items:flex-end;gap:48px;height:120px;justify-content:center">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;max-width:200px">
+            <div id="chart-trad-bar" style="width:100%;background:rgba(255,255,255,0.15);border-radius:6px 6px 0 0;transition:height 0.8s cubic-bezier(0.175,0.885,0.32,1.275);min-height:6px;height:80px"></div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.45);text-align:center;line-height:1.4">Your Current<br/>Brokerage</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;max-width:200px">
+            <div id="chart-prg-bar" style="width:100%;background:linear-gradient(to top,var(--gold),var(--gold-light));border-radius:6px 6px 0 0;transition:height 0.8s cubic-bezier(0.175,0.885,0.32,1.275);min-height:6px;height:120px;box-shadow:0 0 24px rgba(196,149,58,0.35)"></div>
+            <div style="font-size:12px;color:var(--gold);font-weight:700;text-align:center;line-height:1.4">Pro Realty<br/>Group</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div style="text-align:center;margin-top:40px;">
@@ -1664,7 +1758,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <img src="assets/logo-dark.png" alt="Pro Realty Group" />
+      <img src="assets/logo-black.png" alt="Pro Realty Group" />
     </div>
     <div class="footer-links">
       <a href="#calculator">Commission Calculator</a>
@@ -1690,24 +1784,84 @@ window.addEventListener('scroll', () => {
   else nav.classList.remove('scrolled');
 });
 
-// ---- SCROLL ANIMATIONS ----
+// ---- HERO PARALLAX ----
+window.addEventListener('scroll', () => {
+  const hero = document.querySelector('.hero-headline');
+  if (hero) hero.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+});
+
+// ---- PAIN CARDS: Alternating slide direction ----
+document.querySelectorAll('.pain-card').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = i % 2 === 0 ? 'translateX(-60px)' : 'translateX(60px)';
+  el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+  el.style.transitionDelay = `${(i % 3) * 0.1}s`;
+});
+
+// ---- BENEFIT & TESTIMONIAL CARDS: Scale + rotate ----
+document.querySelectorAll('.benefit-card').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px) scale(0.95)';
+  el.style.transition = `opacity 0.6s ease, transform 0.6s cubic-bezier(0.175,0.885,0.32,1.275)`;
+  el.style.transitionDelay = `${(i % 3) * 0.1}s`;
+});
+
+document.querySelectorAll('.testimonial-card').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px) rotate(1.5deg)';
+  el.style.transition = `opacity 0.7s ease, transform 0.7s cubic-bezier(0.175,0.885,0.32,1.275)`;
+  el.style.transitionDelay = `${(i % 3) * 0.12}s`;
+});
+
+document.querySelectorAll('.process-step').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(40px) scale(0.9)';
+  el.style.transition = `opacity 0.6s ease, transform 0.6s cubic-bezier(0.175,0.885,0.32,1.275)`;
+  el.style.transitionDelay = `${i * 0.15}s`;
+});
+
+// ---- SCROLL OBSERVER ----
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateX(0) translateY(0) scale(1) rotate(0deg)';
       e.target.classList.add('visible');
       observer.unobserve(e.target);
     }
   });
-}, { threshold: 0.15 });
+}, { threshold: 0.12 });
 
 document.querySelectorAll('.pain-card, .benefit-card, .testimonial-card, .process-step, .shift-text, .shift-sub').forEach(el => {
   observer.observe(el);
 });
 
-// Stagger delay for grids
-document.querySelectorAll('.pain-card, .benefit-card, .testimonial-card, .process-step').forEach((el, i) => {
-  el.style.transitionDelay = `${(i % 3) * 0.12}s`;
-});
+// ---- STATS COUNTERS ----
+(function() {
+  const counters = document.querySelectorAll('.stat-counter-num');
+  const obsC = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      el.style.opacity = '1';
+      if (el.dataset.static) { el.textContent = el.dataset.static; obsC.unobserve(el); return; }
+      const target = parseInt(el.dataset.target);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const dur = 1600;
+      const startTime = performance.now();
+      function tick(now) {
+        const pct = Math.min((now - startTime) / dur, 1);
+        const ease = 1 - Math.pow(1 - pct, 3);
+        el.textContent = prefix + Math.round(ease * target) + suffix;
+        if (pct < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      obsC.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => obsC.observe(c));
+})();
 
 // ---- FAQ ACCORDION ----
 document.querySelectorAll('.faq-q').forEach(q => {
@@ -1716,6 +1870,20 @@ document.querySelectorAll('.faq-q').forEach(q => {
     const isOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
     if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ---- BUTTON RIPPLE ----
+document.querySelectorAll('.btn-primary').forEach(btn => {
+  btn.style.position = 'relative';
+  btn.style.overflow = 'hidden';
+  btn.addEventListener('click', function(e) {
+    const r = document.createElement('span');
+    const rect = this.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    r.style.cssText = `position:absolute;width:${size}px;height:${size}px;border-radius:50%;background:rgba(255,255,255,0.3);transform:scale(0);animation:ripple 0.6s ease-out;top:${e.clientY - rect.top - size/2}px;left:${e.clientX - rect.left - size/2}px;pointer-events:none`;
+    this.appendChild(r);
+    setTimeout(() => r.remove(), 600);
   });
 });
 
@@ -1742,7 +1910,7 @@ function calcCommission() {
 
   // PRG
   const prgCompliance = 300;
-  const prgTechFee = 1200; // $100/mo
+  const prgTechFee = 1200;
   const prgPerDeal = commPerDeal - prgCompliance;
   const prgAnnual = (prgPerDeal * deals) - prgTechFee;
 
@@ -1765,6 +1933,14 @@ function calcCommission() {
 
   document.getElementById('diffAmount').textContent = fmt(Math.max(0, diff));
   document.getElementById('diffPerDeal').textContent = fmt(Math.max(0, (prgPerDeal - tradAgentPerDeal))) + ' per deal';
+
+  // Bar chart
+  const maxEarning = Math.max(tradAnnual, prgAnnual, 1);
+  const maxH = 120;
+  const tb = document.getElementById('chart-trad-bar');
+  const pb = document.getElementById('chart-prg-bar');
+  if (tb) tb.style.height = Math.max((tradAnnual / maxEarning) * maxH, 6) + 'px';
+  if (pb) pb.style.height = Math.max((prgAnnual / maxEarning) * maxH, 6) + 'px';
 }
 
 // Run on load
