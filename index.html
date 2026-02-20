@@ -193,7 +193,7 @@
   .ticker-track {
     display: flex;
     gap: 0;
-    animation: ticker 35s linear infinite;
+    animation: ticker 16s linear infinite;
     white-space: nowrap;
     will-change: transform;
   }
@@ -793,6 +793,26 @@
     object-position: center top;
   }
 
+  @media (max-width: 860px) {
+    .about-photo-wrap {
+      overflow: hidden;
+      border-radius: 12px;
+      max-width: 340px;
+    }
+    .about-photo-wrap::before {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 12px;
+      opacity: 0.12;
+    }
+    .about-photo-wrap img {
+      height: 400px;
+      object-position: center 8%;
+    }
+  }
+
   .about-eyebrow {
     font-size: 12px;
     font-weight: 700;
@@ -939,11 +959,17 @@
     position: relative;
   }
 
-  @media (max-width: 640px) {
-    .process-steps { grid-template-columns: 1fr; }
+  /* Desktop: 3-column layout */
+  /* Mobile: single column, no horizontal line */
+  @media (max-width: 768px) {
+    .process-steps {
+      grid-template-columns: 1fr;
+      gap: 0;
+      max-width: 440px;
+    }
   }
 
-  /* Base (gray) track line */
+  /* Base (gray) track line — desktop only */
   .process-steps::before {
     content: '';
     position: absolute;
@@ -969,7 +995,7 @@
     box-shadow: 0 0 8px rgba(196,149,58,0.5);
   }
   .process-steps.line-go .process-line { transform: scaleX(1); }
-  /* Circles pulse in sequence as the line passes — no permanent style change */
+  /* Circles pulse in sequence as the line passes */
   @keyframes stepPulse {
     0%   { box-shadow: 0 0 0 0   rgba(196,149,58,0.7); }
     60%  { box-shadow: 0 0 0 14px rgba(196,149,58,0); }
@@ -979,8 +1005,22 @@
   .process-steps.line-go .process-step:nth-child(3) .step-num { animation: stepPulse 0.9s ease 0.9s 1 forwards; }
   .process-steps.line-go .process-step:nth-child(4) .step-num { animation: stepPulse 0.9s ease 1.6s 1 forwards; }
 
-  @media (max-width: 640px) {
+  /* Mobile: kill horizontal lines, use vertical connector between steps */
+  @media (max-width: 768px) {
     .process-steps::before { display: none; }
+    .process-line { display: none; }
+    .process-step {
+      padding: 20px 20px 0;
+    }
+    .process-step:not(:last-child)::after {
+      content: '';
+      display: block;
+      width: 2px;
+      height: 36px;
+      background: linear-gradient(180deg, var(--gold), var(--gold-light));
+      margin: 20px auto 0;
+      box-shadow: 0 0 6px rgba(196,149,58,0.4);
+    }
   }
 
   .process-step {
@@ -1213,10 +1253,30 @@
     font-weight: 700;
     color: var(--gold);
     line-height: 1;
+    white-space: nowrap;
     opacity: 0;
     transition: opacity 0.5s ease;
   }
   .stat-counter-num.counted { opacity: 1; }
+
+  .stats-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px 16px;
+    }
+    .stat-counter-num {
+      font-size: 38px;
+    }
+  }
 
   /* ===================== NEW KEYFRAMES ===================== */
   @keyframes floatOrb {
@@ -1344,7 +1404,7 @@
 
 <!-- STATS BAR -->
 <section id="stats-bar" style="background:var(--off-white);padding:60px 24px;border-bottom:1px solid var(--border)">
-  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center">
+  <div class="stats-grid">
     <div class="stat-counter">
       <div class="stat-counter-num" data-target="100" data-suffix="%">0%</div>
       <div style="font-size:13px;color:var(--text-muted);margin-top:8px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase">Commission to You</div>
