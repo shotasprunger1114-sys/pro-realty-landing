@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pro Realty Group — Keep 100% of Your Commission</title>
+<meta name="description" content="Michigan's agent-first brokerage. 100% commission, $300 flat fee, 1-on-1 coaching, and leads provided. Built for producers who are done settling." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0B1A2F;
+    --navy-light: #132240;
+    --gold: #C4953A;
+    --gold-light: #D4A84A;
+    --white: #FFFFFF;
+    --off-white: #F7F6F3;
+    --light-gray: #F0EFE9;
+    --border: #E2E0D8;
+    --text-dark: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --text-muted: #888888;
+    --danger: #C0392B;
+    --success: #27AE60;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ===================== NAV ===================== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    background: transparent;
+  }
+
+  nav.scrolled {
+    background: rgba(11, 26, 47, 0.97);
+    backdrop-filter: blur(12px);
+    padding: 14px 40px;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.3);
+  }
+
+  .nav-logo img {
+    height: 44px;
+    filter: brightness(0) invert(1);
+  }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--white);
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ===================== HERO ===================== */
+  #hero {
+    min-height: 100vh;
+    background: var(--navy);
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(196, 149, 58, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(196, 149, 58, 0.08) 0%, transparent 50%),
+      linear-gradient(135deg, #0B1A2F 0%, #0E2040 50%, #0B1A2F 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C4953A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 6vw, 76px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    max-width: 900px;
+    margin: 0 auto 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero-headline span { color: var(--gold); }
+
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 20px);
+    color: rgba(255,255,255,0.75);
+    max-width: 620px;
+    line-height: 1.7;
+    margin: 0 auto 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--white);
+    padding: 18px 44px;
+    border-radius: 4px;
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    animation: pulse 2s ease 1.6s 1;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .hero-micro-cta {
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+
+  .hero-micro-cta:hover { color: rgba(255,255,255,0.8); }
+
+  /* Scrolling ticker */
+  .ticker-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(196, 149, 58, 0.15);
+    border-top: 1px solid rgba(196, 149, 58, 0.3);
+    overflow: hidden;
+    padding: 14px 0;
+    opacity: 0;
+    animation: fadeIn 0.8s ease 1.2s forwards;
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 0;
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 0 40px;
+    flex-shrink: 0;
+  }
+
+  .ticker-dot {
+    width: 5px; height: 5px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ===================== PAIN POINTS ===================== */
+  #pain {
+    background: var(--off-white);
+    padding: 100px 24px;
+  }
+
+  .section-label {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    text-align: center;
+    color: var(--navy);
+    max-width: 780px;
+    margin: 0 auto 64px;
+    line-height: 1.2;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .pain-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid #C0392B;
+    border-radius: 8px;
+    padding: 32px 28px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+
+  .pain-card.visible { opacity: 1; transform: translateY(0); }
+
+  .pain-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .pain-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .pain-desc {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  /* ===================== SHIFT ===================== */
+  #shift {
+    background: var(--navy);
+    padding: 100px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #shift::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(196,149,58,0.15) 0%, transparent 70%);
+  }
+
+  .shift-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700;
+    color: var(--white);
+    max-width: 800px;
+    margin: 0 auto 20px;
+    line-height: 1.2;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+  }
+
+  .shift-text.visible { opacity: 1; transform: translateY(0); }
+  .shift-text span { color: var(--gold); }
+
+  .shift-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 18px;
+    position: relative;
+    opacity: 0;
+    transition: all 0.8s ease 0.2s;
+    transform: translateY(20px);
+  }
+
+  .shift-sub.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===================== BENEFITS ===================== */
+  #benefits {
+    padding: 100px 24px;
+    background: var(--white);
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .benefit-card {
+    padding: 36px 32px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .benefit-card.visible { opacity: 1; transform: translateY(0); }
+  .benefit-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.1); border-color: var(--gold); }
+
+  .benefit-icon {
+    width: 52px; height: 52px;
+    background: rgba(196,149,58,0.12);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .benefit-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .benefit-desc {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  /* ===================== CALCULATOR ===================== */
+  #calculator {
+    background: var(--navy);
+    padding: 100px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #calculator::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(196,149,58,0.1) 0%, transparent 60%);
+  }
+
+  .calc-container {
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .section-label.light { color: var(--gold); }
+  .section-headline.light { color: var(--white); }
+
+  .calc-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(196,149,58,0.25);
+    border-radius: 16px;
+    padding: 48px;
+    backdrop-filter: blur(10px);
+  }
+
+  .calc-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 640px) {
+    .calc-inputs { grid-template-columns: 1fr; }
+  }
+
+  .input-group label {
+    display: block;
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .input-group .input-wrap {
+    position: relative;
+  }
+
+  .input-group .prefix {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.4);
+    font-size: 16px;
+    pointer-events: none;
+  }
+
+  .input-group .suffix {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.4);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .input-group input[type="number"] {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 14px 40px 14px 36px;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
+    outline: none;
+    -moz-appearance: textfield;
+  }
+
+  .input-group input[type="number"]::-webkit-outer-spin-button,
+  .input-group input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+  .input-group input[type="number"]:focus {
+    border-color: var(--gold);
+    background: rgba(255,255,255,0.12);
+  }
+
+  .range-group {
+    grid-column: 1 / -1;
+  }
+
+  .range-group label {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .range-group label span {
+    color: var(--gold);
+    font-size: 18px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 700;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 4px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 4px;
+    outline: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    background: var(--gold);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(196,149,58,0.5);
+  }
+
+  /* Results */
+  .calc-results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .calc-results { grid-template-columns: 1fr; }
+  }
+
+  .result-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-card.prg {
+    background: rgba(196,149,58,0.12);
+    border-color: rgba(196,149,58,0.4);
+  }
+
+  .result-card.prg::after {
+    content: '★ BEST';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--gold);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 8px;
+    border-radius: 3px;
+  }
+
+  .result-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 8px;
+  }
+
+  .result-brokerage {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 20px;
+  }
+
+  .result-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .result-card.prg .result-amount { color: var(--gold); }
+
+  .result-per-deal {
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 20px;
+  }
+
+  .result-breakdown {
+    text-align: left;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 16px;
+  }
+
+  .result-breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 8px;
+  }
+
+  .result-breakdown-item.total {
+    color: rgba(255,255,255,0.85);
+    font-weight: 700;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 8px;
+    margin-top: 4px;
+    font-size: 14px;
+  }
+
+  .result-breakdown-item.negative { color: #F08080; }
+
+  .calc-difference {
+    background: linear-gradient(135deg, rgba(39,174,96,0.15), rgba(39,174,96,0.08));
+    border: 1px solid rgba(39,174,96,0.3);
+    border-radius: 10px;
+    padding: 24px 32px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .calc-diff-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 10px;
+  }
+
+  .calc-diff-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: #2ECC71;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .calc-diff-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .calc-diff-sub strong { color: rgba(255,255,255,0.85); }
+
+  .calc-note {
+    text-align: center;
+    margin-top: 20px;
+    color: rgba(255,255,255,0.35);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  /* ===================== COMPARISON TABLE ===================== */
+  #comparison {
+    padding: 100px 24px;
+    background: var(--off-white);
+  }
+
+  .compare-table-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+
+  table.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    font-size: 15px;
+  }
+
+  .compare-table th {
+    padding: 20px 24px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .compare-table th:first-child { text-align: left; }
+
+  .compare-table th.prg-col {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 0;
+  }
+
+  .compare-table th.prg-col span {
+    display: block;
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .compare-table td {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-mid);
+    vertical-align: middle;
+  }
+
+  .compare-table td:first-child {
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  .compare-table td.prg-col {
+    background: rgba(11,26,47,0.03);
+    text-align: center;
+    font-weight: 700;
+    color: var(--navy);
+    border-left: 2px solid var(--gold);
+    border-right: 2px solid var(--gold);
+  }
+
+  .compare-table td:not(:first-child):not(.prg-col) { text-align: center; }
+
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:last-child td.prg-col { border-bottom: 2px solid var(--gold); }
+
+  .check { color: var(--success); font-size: 18px; font-weight: 700; }
+  .cross { color: var(--danger); font-size: 18px; }
+  .partial { color: #E67E22; font-size: 14px; font-weight: 600; }
+
+  /* ===================== ABOUT ===================== */
+  #about {
+    padding: 100px 24px;
+    background: var(--white);
+  }
+
+  .about-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .about-inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .about-photo-wrap { margin: 0 auto; max-width: 360px; }
+    .stat-row { justify-content: center; }
+  }
+
+  .about-photo-wrap {
+    position: relative;
+  }
+
+  .about-photo-wrap::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: -20px;
+    bottom: -20px;
+    background: var(--gold);
+    border-radius: 12px;
+    opacity: 0.2;
+    z-index: 0;
+  }
+
+  .about-photo-wrap img {
+    width: 100%;
+    border-radius: 12px;
+    position: relative;
+    z-index: 1;
+    display: block;
+  }
+
+  .about-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .about-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .about-title {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+
+  .about-bio {
+    font-size: 16px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-num span { color: var(--gold); }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* ===================== TESTIMONIALS ===================== */
+  #testimonials {
+    padding: 100px 24px;
+    background: var(--off-white);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .testimonial-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+
+  .testimonial-card.visible { opacity: 1; transform: translateY(0); }
+
+  .stars {
+    color: var(--gold);
+    font-size: 18px;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+
+  .testimonial-quote {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.75;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .author-avatar {
+    width: 44px; height: 44px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .author-detail {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ===================== PROCESS ===================== */
+  #process {
+    padding: 100px 24px;
+    background: var(--white);
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  @media (max-width: 640px) {
+    .process-steps { grid-template-columns: 1fr; }
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 36px;
+    left: calc(16.66% + 20px);
+    right: calc(16.66% + 20px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    z-index: 0;
+  }
+
+  @media (max-width: 640px) {
+    .process-steps::before { display: none; }
+  }
+
+  .process-step {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+
+  .process-step.visible { opacity: 1; transform: translateY(0); }
+
+  .step-num {
+    width: 72px; height: 72px;
+    background: var(--navy);
+    border: 3px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .step-desc {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  /* ===================== OBJECTIONS ===================== */
+  #objections {
+    padding: 80px 24px;
+    background: var(--off-white);
+  }
+
+  .faq-list {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .faq-q {
+    padding: 24px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    user-select: none;
+  }
+
+  .faq-q::after {
+    content: '+';
+    font-size: 24px;
+    color: var(--gold);
+    font-weight: 300;
+    flex-shrink: 0;
+    margin-left: 16px;
+    transition: transform 0.3s;
+  }
+
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+
+  .faq-a {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0;
+  }
+
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding-bottom: 24px;
+  }
+
+  /* ===================== FINAL CTA ===================== */
+  #cta-final {
+    background: var(--navy);
+    padding: 120px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #cta-final::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(196,149,58,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(196,149,58,0.1) 0%, transparent 50%);
+  }
+
+  .cta-final-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700;
+    color: var(--white);
+    max-width: 700px;
+    margin: 0 auto 20px;
+    line-height: 1.15;
+    position: relative;
+  }
+
+  .cta-final-sub {
+    color: rgba(255,255,255,0.65);
+    font-size: 18px;
+    max-width: 500px;
+    margin: 0 auto 44px;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  .cta-btn-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .cta-detail {
+    color: rgba(255,255,255,0.4);
+    font-size: 13px;
+    position: relative;
+  }
+
+  /* ===================== FOOTER ===================== */
+  footer {
+    background: #060E1A;
+    padding: 48px 24px 32px;
+    border-top: 1px solid rgba(196,149,58,0.2);
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .footer-logo img {
+    height: 40px;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer-links a {
+    color: rgba(255,255,255,0.45);
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-copy {
+    color: rgba(255,255,255,0.25);
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* ===================== ANIMATIONS ===================== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(196,149,58,0.7); }
+    70% { box-shadow: 0 0 0 20px rgba(196,149,58,0); }
+    100% { box-shadow: 0 0 0 0 rgba(196,149,58,0); }
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ===================== UTILITY ===================== */
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-logo img { height: 36px; }
+    .calc-card { padding: 28px 20px; }
+    .about-inner { gap: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <img src="assets/logo-dark.png" alt="Pro Realty Group" />
+  </div>
+  <a href="https://calendly.com/realtor-billyj/30min" target="_blank" class="nav-cta">Book a Confidential Call →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow">Michigan's Agent-First Brokerage</div>
+  <h1 class="hero-headline">
+    Stop Making Your<br />
+    <span>Broker Rich.</span><br />
+    Keep 100% and Build Your Empire.
+  </h1>
+  <p class="hero-sub">
+    One-on-one coaching. Broker support on your schedule. Zero commission splits — ever.
+    Pro Realty Group was built for producers who are done settling.
+  </p>
+  <div class="hero-cta-group">
+    <a href="https://calendly.com/realtor-billyj/30min" target="_blank" class="btn-primary">Book a Confidential Call →</a>
+    <a href="#calculator" class="hero-micro-cta">Or scroll to see what you'd keep with our commission calculator ↓</a>
+  </div>
+
+  <div class="ticker-wrapper">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ticker-dot"></span> 100% Commission on All Personal Closings</span>
+      <span class="ticker-item"><span class="ticker-dot"></span> $300 Flat Compliance Fee — That's It</span>
+      <span class="ticker-item"><span class="ticker-dot"></span> 1-on-1 Coaching Included</span>
+      <span class="ticker-item"><span class="ticker-dot"></span> Top-Tier CRM at No Cost</span>
+      <span class="ticker-item"><span class="ticker-dot"></span> Leads Provided If Needed</span>
+      <span class="ticker-item"><span class="ticker-dot"></span> No Franchise Fees</span>
+      <span class="ticker-item"><span class="ticker-dot"></span> No Catches</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="ticker-item"><span class="ticker-dot"></span> 100% Commission on All Personal Closings</span>
+      <span class="ticker-item"><span class="ticker-dot"></span> $300 Flat Compliance Fee — That's It</span>
+      <span class="ticker-item"><span class="ticker-dot"></span> 1-on-1 Coaching Included</span>
+      <span class="ticker-item"><span class="ticker-dot"></span> Top-Tier CRM at No Cost</span>
+      <span class="ticker-item"><span class="ticker-dot"></span> Leads Provided If Needed</span>
+      <span class="ticker-item"><span class="ticker-dot"></span> No Franchise Fees</span>
+      <span class="ticker-item"><span class="ticker-dot"></span> No Catches</span>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section id="pain">
+  <p class="section-label">Sound Familiar?</p>
+  <h2 class="section-headline">If You're at a Traditional Brokerage,<br />This Probably Sounds Familiar.</h2>
+  <div class="pain-grid">
+    <div class="pain-card">
+      <span class="pain-icon">💸</span>
+      <div class="pain-title">Paying heavy splits for minimal support.</div>
+      <p class="pain-desc">You're closing deals and handing over tens of thousands a year just to be treated like a number. Stop getting nickel-and-dimed for everything you do.</p>
+    </div>
+    <div class="pain-card">
+      <span class="pain-icon">📵</span>
+      <div class="pain-title">Lost in the mix.</div>
+      <p class="pain-desc">No real coaching, no growth path, no one picking up the phone when you need help. You're a transaction — not a person.</p>
+    </div>
+    <div class="pain-card">
+      <span class="pain-icon">🏷️</span>
+      <div class="pain-title">Growing someone else's name.</div>
+      <p class="pain-desc">You're on a team building the team leader's brand — not your own. And you know it. What happens if that team abandons you? You should work for yourself, not someone else.</p>
+    </div>
+    <div class="pain-card">
+      <span class="pain-icon">🚫</span>
+      <div class="pain-title">No leads. No systems. No way to scale.</div>
+      <p class="pain-desc">You're expected to produce at a high level with zero infrastructure to get there. You're on your own — and that's not an accident.</p>
+    </div>
+    <div class="pain-card">
+      <span class="pain-icon">🔒</span>
+      <div class="pain-title">Stuck under a glass ceiling.</div>
+      <p class="pain-desc">You sell the same amount of real estate year over year because nothing around you is designed to help you break through.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SHIFT -->
+<section id="shift">
+  <p class="shift-text">There's a better model.<br /><span>And it was built for agents like you.</span></p>
+  <p class="shift-sub">We broke away from the traditional brokerage model entirely.</p>
+</section>
+
+<!-- BENEFITS -->
+<section id="benefits">
+  <p class="section-label">What You Get</p>
+  <h2 class="section-headline">Everything You Need to Grow.<br />Nothing You Don't.</h2>
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">💯</div>
+      <div class="benefit-title">100% Commission — Zero Splits</div>
+      <p class="benefit-desc">Every dollar you earn on personal closings is yours. One flat $300 compliance fee per closing. That's it. No percentages, no surprises, no franchise fees.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🎯</div>
+      <div class="benefit-title">1-on-1 Coaching from the Broker</div>
+      <p class="benefit-desc">Direct access to Billy — not an assistant, not a trainer, the broker himself. Available by phone anytime. Personalized strategy built around your business, not his quota.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">📊</div>
+      <div class="benefit-title">Top-Tier CRM at No Cost</div>
+      <p class="benefit-desc">Full access to a premium CRM system included in your $100/month tech fee. No hidden software charges, no nickel-and-diming for tools you actually need to do your job.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🔥</div>
+      <div class="benefit-title">Leads Provided If Needed</div>
+      <p class="benefit-desc">Need business? We've got you. Office-provided leads on a 50/50 split — so you only share when you get results. Build your pipeline or use ours.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">⚙️</div>
+      <div class="benefit-title">Full Back-Office Support</div>
+      <p class="benefit-desc">Admin staff, transaction coordinator, and broker support — all available to you. Close faster, close more, without drowning in paperwork.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🏆</div>
+      <div class="benefit-title">Build Your Brand — Not Theirs</div>
+      <p class="benefit-desc">At PRG, you're the brand. We give you the infrastructure and flexibility to grow your name, your reputation, and your business on your own terms.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMISSION CALCULATOR -->
+<section id="calculator">
+  <div class="calc-container">
+    <p class="section-label light">The Math Doesn't Lie</p>
+    <h2 class="section-headline light" style="text-align:center;margin-bottom:48px;">See Exactly What You'd Keep<br />at Pro Realty Group</h2>
+
+    <div class="calc-card">
+      <div class="calc-inputs">
+
+        <div class="input-group">
+          <label>Average Sale Price</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="salePrice" value="400000" min="100000" max="5000000" step="10000" oninput="calcCommission()" />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Your Commission Rate</label>
+          <div class="input-wrap">
+            <input type="number" id="commRate" value="3" min="1" max="6" step="0.1" oninput="calcCommission()" />
+            <span class="suffix">%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Current Brokerage Split <small style="font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;">(your %, e.g. 70 = 70/30 split)</small></label>
+          <div class="input-wrap">
+            <input type="number" id="currentSplit" value="70" min="30" max="99" step="1" oninput="calcCommission()" />
+            <span class="suffix">% to you</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Current Monthly Brokerage Fee</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="monthlyFee" value="0" min="0" max="1000" step="50" oninput="calcCommission()" />
+          </div>
+        </div>
+
+        <div class="range-group">
+          <label>Deals Closed Per Year <span id="dealsLabel">24</span></label>
+          <input type="range" id="dealsPerYear" min="4" max="60" value="24" oninput="document.getElementById('dealsLabel').textContent=this.value;calcCommission()" />
+        </div>
+
+      </div>
+
+      <!-- Results -->
+      <div class="calc-results">
+        <div class="result-card traditional">
+          <div class="result-label">Current Situation</div>
+          <div class="result-brokerage">Traditional Brokerage</div>
+          <div class="result-amount" id="tradEarnings">$0</div>
+          <div class="result-per-deal" id="tradPerDeal">$0 per deal</div>
+          <div class="result-breakdown">
+            <div class="result-breakdown-item">
+              <span>Gross commission/deal</span>
+              <span id="tradGross">—</span>
+            </div>
+            <div class="result-breakdown-item negative">
+              <span>Broker split (<span id="tradSplitPct">30</span>%)</span>
+              <span id="tradSplitAmt">—</span>
+            </div>
+            <div class="result-breakdown-item negative">
+              <span>Annual monthly fees</span>
+              <span id="tradFees">—</span>
+            </div>
+            <div class="result-breakdown-item total">
+              <span>Annual take-home</span>
+              <span id="tradTotal">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card prg">
+          <div class="result-label">With PRG</div>
+          <div class="result-brokerage">Pro Realty Group</div>
+          <div class="result-amount" id="prgEarnings">$0</div>
+          <div class="result-per-deal" id="prgPerDeal">$0 per deal</div>
+          <div class="result-breakdown">
+            <div class="result-breakdown-item">
+              <span>Gross commission/deal</span>
+              <span id="prgGross">—</span>
+            </div>
+            <div class="result-breakdown-item negative">
+              <span>$300 compliance fee</span>
+              <span id="prgCompliance">—</span>
+            </div>
+            <div class="result-breakdown-item negative">
+              <span>$100/mo tech & E&O</span>
+              <span>-$1,200/yr</span>
+            </div>
+            <div class="result-breakdown-item total">
+              <span>Annual take-home</span>
+              <span id="prgTotal">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-difference">
+        <div class="calc-diff-label">Extra money in your pocket every year at PRG</div>
+        <div class="calc-diff-amount" id="diffAmount">$0</div>
+        <div class="calc-diff-sub">That's <strong id="diffPerDeal">$0 per deal</strong> you're leaving on the table at your current brokerage.</div>
+      </div>
+
+      <p class="calc-note">
+        Calculator assumes all closings are personal (not office-provided leads). Office leads are 50/50 split.<br/>
+        Includes PRG's $100/month tech & E&amp;O fee ($1,200/year). Compliance fee ($300/closing) is passed to buyer/seller at closing.
+      </p>
+    </div>
+
+    <div style="text-align:center;margin-top:40px;">
+      <a href="https://calendly.com/realtor-billyj/30min" target="_blank" class="btn-primary" style="display:inline-block;">Book a Confidential Call — Let's Run Your Numbers →</a>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section id="comparison">
+  <p class="section-label">How We Stack Up</p>
+  <h2 class="section-headline">PRG vs. The Rest</h2>
+  <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="width:30%"></th>
+          <th class="prg-col"><span>★ Our Pick</span>Pro Realty Group</th>
+          <th>Big Box Brokerage</th>
+          <th>Generic 100% Model</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Commission Split</td>
+          <td class="prg-col">100% to You</td>
+          <td>60–80% to You</td>
+          <td>100% to You</td>
+        </tr>
+        <tr>
+          <td>Per-Closing Fee</td>
+          <td class="prg-col">$300 flat</td>
+          <td>$0 (you already split)</td>
+          <td>$300–$900+</td>
+        </tr>
+        <tr>
+          <td>Monthly Fee</td>
+          <td class="prg-col">$100 (tech + E&O)</td>
+          <td>$50–$200+</td>
+          <td>$99–$499+</td>
+        </tr>
+        <tr>
+          <td>1-on-1 Broker Coaching</td>
+          <td class="prg-col"><span class="check">✓</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+        </tr>
+        <tr>
+          <td>Leads Provided</td>
+          <td class="prg-col"><span class="check">✓</span> (50/50 split)</td>
+          <td><span class="partial">Sometimes</span></td>
+          <td><span class="cross">✗</span></td>
+        </tr>
+        <tr>
+          <td>Transaction Coordinator</td>
+          <td class="prg-col"><span class="check">✓</span></td>
+          <td><span class="partial">Varies</span></td>
+          <td><span class="cross">✗</span></td>
+        </tr>
+        <tr>
+          <td>CRM Included</td>
+          <td class="prg-col"><span class="check">✓ Top-tier</span></td>
+          <td><span class="partial">Basic</span></td>
+          <td><span class="cross">✗</span></td>
+        </tr>
+        <tr>
+          <td>Build Your Personal Brand</td>
+          <td class="prg-col"><span class="check">✓</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Franchise Fees</td>
+          <td class="prg-col"><span class="check">None</span></td>
+          <td><span class="cross">Yes</span></td>
+          <td><span class="cross">Sometimes</span></td>
+        </tr>
+        <tr>
+          <td>Broker Answers Their Phone</td>
+          <td class="prg-col"><span class="check">✓ Always</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="partial">Maybe</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ABOUT BILLY -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-photo-wrap">
+      <img src="assets/billy-headshot.png" alt="Billy Johair — Broker/Owner, Pro Realty Group" />
+    </div>
+    <div class="about-content">
+      <p class="about-eyebrow">Meet Your Broker</p>
+      <h2 class="about-name">Billy Johair</h2>
+      <p class="about-title">Broker / Owner — Pro Realty Group</p>
+      <p class="about-bio">
+        I built Pro Realty Group because I lived the frustration firsthand. I watched talented agents hand over thousands of dollars to brokerages that treated them like numbers — not people. That ends here.
+      </p>
+      <p class="about-bio">
+        At PRG, I coach every agent individually — not with a script, but with a real plan built around your business. My number is in every agent's phone. When you call, I answer. That's not a marketing line. That's how I run this company.
+      </p>
+      <p class="about-bio">
+        My goal is simple: help you grow to your maximum potential. Not my potential — yours.
+      </p>
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-num">100<span>%</span></div>
+          <div class="stat-label">Commission to agents</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num"><span>$</span>300</div>
+          <div class="stat-label">Flat fee per closing</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">24<span>/7</span></div>
+          <div class="stat-label">Broker availability</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <p class="section-label">Real Agents. Real Results.</p>
+  <h2 class="section-headline">What Agents Say After Joining PRG</h2>
+  <div class="testimonials-grid">
+
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-quote">"The biggest benefit in my business has been the no-cap commission structure. It allows me to invest more back into my business and more resources for my clients. I would never give it a second thought."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">M</div>
+        <div>
+          <div class="author-name">Matt</div>
+          <div class="author-detail">PRG Agent</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-quote">"I was tired of paying so much to be a part of something that didn't add value to my business. I was doing all the work and giving someone else most of the reward. PRG changed that completely."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">R</div>
+        <div>
+          <div class="author-name">Reem</div>
+          <div class="author-detail">PRG Agent</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-quote">"PRG provides strong mentorship and the flexibility to tailor my business around my clients' needs. The culture encourages agents to collaborate rather than compete — it changes everything."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <div class="author-name">Suzy</div>
+          <div class="author-detail">PRG Agent</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-quote">"Absolutely, this was a no-brainer move. Never gave it a second thought. The support, coaching, splits, culture, and TC help are second to none."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SH</div>
+        <div>
+          <div class="author-name">Shay</div>
+          <div class="author-detail">PRG Agent</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <p class="section-label">Getting Started</p>
+  <h2 class="section-headline">Joining PRG Takes<br />Three Simple Steps</h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Book a Confidential Call</div>
+      <p class="step-desc">15–30 minutes with Billy. No pressure, no pitch. Just an honest conversation about where you are and where you want to go.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Review Your Offer</div>
+      <p class="step-desc">We'll run your numbers together, walk through your goals, and show you exactly what joining PRG looks like for your specific situation.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Make the Move</div>
+      <p class="step-desc">Transition is handled. Get onboarded, get your tools, and start keeping 100% of every deal you close — starting now.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIONS / FAQ -->
+<section id="objections">
+  <p class="section-label">Common Questions</p>
+  <h2 class="section-headline" style="margin-bottom:48px;">We've Heard Every Concern.<br />Here Are Honest Answers.</h2>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <div class="faq-q">I'm worried about leaving my current brokerage — what if they pressure me?</div>
+      <div class="faq-a">That's the most common reason agents stay somewhere that isn't working for them. Brokers use guilt because it works — but ask yourself: whose career is this? Your broker's? Or yours? We'll walk you through the transition professionally. You don't owe anyone your earning potential.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">I don't need more training — I've been in the business for years.</div>
+      <div class="faq-a">Fair. Coaching at PRG isn't remedial training — it's strategic. Billy's there to help you scale, build systems, and break through whatever ceiling you're currently under. If you don't want it, you don't have to use it. But it's there when you do.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">I already get leads from my current brokerage. Will I lose that?</div>
+      <div class="faq-a">PRG provides leads on a 50/50 split — so you only give up commission when you actually get business from us. If you're already generating your own leads, you keep 100% of those. Most agents end up ahead either way.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What exactly is the $100/month fee for?</div>
+      <div class="faq-a">Technology and E&O (Errors & Omissions) insurance. That's it. You get a premium CRM, admin support, and full coverage — for less than what most brokerages charge just for the desk. No hidden fees, no surprise invoices.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What's the catch?</div>
+      <div class="faq-a">There isn't one. We broke away from the traditional model specifically because we were tired of the catches. If something feels unclear, ask Billy directly on the call. He'll give you a straight answer — because that's how we run this place.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="cta-final">
+  <h2 class="cta-final-headline">Ready to Keep<br /><span style="color:var(--gold)">What You Actually Earn?</span></h2>
+  <p class="cta-final-sub">A 30-minute call with Billy costs you nothing. Staying at the wrong brokerage costs you thousands every year.</p>
+  <div class="cta-btn-wrap">
+    <a href="https://calendly.com/realtor-billyj/30min" target="_blank" class="btn-primary" style="font-size:18px;padding:20px:52px;">Book a Confidential Call →</a>
+    <p class="cta-detail">No pressure. No obligation. Just an honest conversation. <span style="color:rgba(255,255,255,0.6)">📍 Dearborn, MI — serving agents across Michigan</span></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="assets/logo-dark.png" alt="Pro Realty Group" />
+    </div>
+    <div class="footer-links">
+      <a href="#calculator">Commission Calculator</a>
+      <a href="#benefits">Why PRG</a>
+      <a href="#about">Meet Billy</a>
+      <a href="#testimonials">Agent Stories</a>
+      <a href="https://calendly.com/realtor-billyj/30min" target="_blank">Book a Call</a>
+      <a href="tel:2486007000">248-600-7000</a>
+    </div>
+    <p class="footer-copy">
+      Pro Realty Group · 23756 Michigan Ave, STE 100, Dearborn, MI 48124<br />
+      Realtor.billyJ@gmail.com · 248-600-7000<br />
+      © 2026 Pro Realty Group. All rights reserved. Mockup created by Create More Productions.
+    </p>
+  </div>
+</footer>
+
+<script>
+// ---- NAVBAR SCROLL ----
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 60) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// ---- SCROLL ANIMATIONS ----
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.pain-card, .benefit-card, .testimonial-card, .process-step, .shift-text, .shift-sub').forEach(el => {
+  observer.observe(el);
+});
+
+// Stagger delay for grids
+document.querySelectorAll('.pain-card, .benefit-card, .testimonial-card, .process-step').forEach((el, i) => {
+  el.style.transitionDelay = `${(i % 3) * 0.12}s`;
+});
+
+// ---- FAQ ACCORDION ----
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ---- COMMISSION CALCULATOR ----
+function fmt(n) {
+  return '$' + Math.round(n).toLocaleString('en-US');
+}
+
+function calcCommission() {
+  const salePrice = parseFloat(document.getElementById('salePrice').value) || 400000;
+  const commRate = parseFloat(document.getElementById('commRate').value) || 3;
+  const currentSplit = parseFloat(document.getElementById('currentSplit').value) || 70;
+  const monthlyFee = parseFloat(document.getElementById('monthlyFee').value) || 0;
+  const deals = parseInt(document.getElementById('dealsPerYear').value) || 24;
+
+  const commPerDeal = salePrice * (commRate / 100);
+  const brokerSplit = 100 - currentSplit;
+
+  // Traditional brokerage
+  const tradAgentPerDeal = commPerDeal * (currentSplit / 100);
+  const tradSplitCost = commPerDeal * (brokerSplit / 100);
+  const tradAnnualFees = monthlyFee * 12;
+  const tradAnnual = (tradAgentPerDeal * deals) - tradAnnualFees;
+
+  // PRG
+  const prgCompliance = 300;
+  const prgTechFee = 1200; // $100/mo
+  const prgPerDeal = commPerDeal - prgCompliance;
+  const prgAnnual = (prgPerDeal * deals) - prgTechFee;
+
+  const diff = prgAnnual - tradAnnual;
+
+  // Update DOM
+  document.getElementById('tradEarnings').textContent = fmt(tradAnnual);
+  document.getElementById('tradPerDeal').textContent = fmt(tradAgentPerDeal) + ' per deal';
+  document.getElementById('tradGross').textContent = fmt(commPerDeal);
+  document.getElementById('tradSplitPct').textContent = brokerSplit;
+  document.getElementById('tradSplitAmt').textContent = '−' + fmt(tradSplitCost);
+  document.getElementById('tradFees').textContent = tradAnnualFees > 0 ? '−' + fmt(tradAnnualFees) : '$0';
+  document.getElementById('tradTotal').textContent = fmt(tradAnnual);
+
+  document.getElementById('prgEarnings').textContent = fmt(prgAnnual);
+  document.getElementById('prgPerDeal').textContent = fmt(prgPerDeal) + ' per deal';
+  document.getElementById('prgGross').textContent = fmt(commPerDeal);
+  document.getElementById('prgCompliance').textContent = '−' + fmt(300 * deals);
+  document.getElementById('prgTotal').textContent = fmt(prgAnnual);
+
+  document.getElementById('diffAmount').textContent = fmt(Math.max(0, diff));
+  document.getElementById('diffPerDeal').textContent = fmt(Math.max(0, (prgPerDeal - tradAgentPerDeal))) + ' per deal';
+}
+
+// Run on load
+calcCommission();
+</script>
+</body>
+</html>
