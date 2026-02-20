@@ -969,25 +969,15 @@
     box-shadow: 0 0 8px rgba(196,149,58,0.5);
   }
   .process-steps.line-go .process-line { transform: scaleX(1); }
-  /* Step circles light up sequentially */
-  .process-step .step-num {
-    transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+  /* Circles pulse in sequence as the line passes — no permanent style change */
+  @keyframes stepPulse {
+    0%   { box-shadow: 0 0 0 0   rgba(196,149,58,0.7); }
+    60%  { box-shadow: 0 0 0 14px rgba(196,149,58,0); }
+    100% { box-shadow: 0 0 0 0   rgba(196,149,58,0); }
   }
-  .process-steps.line-go .process-step:nth-child(3) .step-num {
-    transition-delay: 0.4s;
-    background: rgba(196,149,58,0.12);
-    box-shadow: 0 0 0 4px rgba(196,149,58,0.2);
-  }
-  .process-steps.line-go .process-step:nth-child(4) .step-num {
-    transition-delay: 0.9s;
-    background: rgba(196,149,58,0.12);
-    box-shadow: 0 0 0 4px rgba(196,149,58,0.2);
-  }
-  .process-steps.line-go .process-step:nth-child(5) .step-num {
-    transition-delay: 1.4s;
-    background: rgba(196,149,58,0.12);
-    box-shadow: 0 0 0 4px rgba(196,149,58,0.2);
-  }
+  .process-steps.line-go .process-step:nth-child(2) .step-num { animation: stepPulse 0.9s ease 0.2s 1 forwards; }
+  .process-steps.line-go .process-step:nth-child(3) .step-num { animation: stepPulse 0.9s ease 0.9s 1 forwards; }
+  .process-steps.line-go .process-step:nth-child(4) .step-num { animation: stepPulse 0.9s ease 1.6s 1 forwards; }
 
   @media (max-width: 640px) {
     .process-steps::before { display: none; }
@@ -1315,23 +1305,42 @@
   </div>
 </section>
 
-<!-- ANIMATED WAVE DIVIDER — seamless tiling paths -->
+<!-- ANIMATED WAVE DIVIDER — background-repeat approach, truly infinite -->
 <style>
-@keyframes waveAnim  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@keyframes waveAnim2 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .wave-divider {
+    background: var(--navy);
+    height: 90px;
+    position: relative;
+    overflow: hidden;
+    line-height: 0;
+  }
+  .wave-divider::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 90px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 90' preserveAspectRatio='none'%3E%3Cpath d='M0,45 C200,0 600,90 800,45 L800,90 L0,90 Z' fill='%23F7F6F3'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 800px 90px;
+    animation: waveRepeat 8s linear infinite;
+    will-change: background-position;
+  }
+  .wave-divider::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 90px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 90' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C200,20 600,85 800,55 L800,90 L0,90 Z' fill='rgba(196%2C149%2C58%2C0.15)'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 600px 90px;
+    animation: waveRepeat2 12s linear infinite;
+    will-change: background-position;
+    opacity: 0.8;
+  }
+  @keyframes waveRepeat  { from { background-position-x: 0; } to { background-position-x: 800px; } }
+  @keyframes waveRepeat2 { from { background-position-x: 600px; } to { background-position-x: 0; } }
 </style>
-<div style="background:var(--navy);overflow:hidden;height:90px;position:relative;line-height:0">
-  <!-- Main cream wave — path tiles perfectly at the 50% mark -->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2880 90" preserveAspectRatio="none"
-    style="position:absolute;bottom:0;width:200%;height:100%;will-change:transform;animation:waveAnim 10s linear infinite">
-    <path d="M0,45 C240,0 480,0 720,45 C960,90 1200,90 1440,45 C1680,0 1920,0 2160,45 C2400,90 2640,90 2880,45 L2880,90 L0,90 Z" fill="#F7F6F3"/>
-  </svg>
-  <!-- Gold accent wave — slightly different frequency, same seamless tile -->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2880 90" preserveAspectRatio="none"
-    style="position:absolute;bottom:0;width:200%;height:100%;will-change:transform;animation:waveAnim2 15s linear infinite reverse;opacity:0.25">
-    <path d="M0,60 C360,20 720,80 1080,55 C1440,30 1440,30 1440,60 C1440,90 1800,20 2160,55 C2520,90 2880,30 2880,60 L2880,90 L0,90 Z" fill="rgba(196,149,58,0.5)"/>
-  </svg>
-</div>
+<div class="wave-divider"></div>
 
 <!-- STATS BAR -->
 <section id="stats-bar" style="background:var(--off-white);padding:60px 24px;border-bottom:1px solid var(--border)">
